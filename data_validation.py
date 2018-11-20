@@ -56,15 +56,31 @@ liveCount, liveRate, deathCount, deathRate = getCountRate(df)
 output = pd.DataFrame({'Model':['OPOM', '', 'data', ''], 
                        'Categories':['Death', 'Live', 'Death', 'Live'],
                        'Count':[91683, 563287, deathCount, deathCount],
-                       'Rate':[.14, .86, liveCount, liveRate]})
-    
+                       'Rate':[0.14, 0.86, deathRate, liveRate]})
+output.to_excel(writer, sheet_name='Sheet1', index=False)    
 
 df1_L, df2_R = get_split(df, 'MELD', 26.5)
 print("where OPOM predict live 91.26%.")
+
 liveCount, liveRate, deathCount, deathRate = getCountRate(df1_L)
 
-output = pd.DataFrame({'model':[], 'liveRate' : [liveCount, liveRate, '']})
-output.to_excel(writer, sheet_name='Sheet1', index=False)
+output = pd.DataFrame({'Model':['OPOM', '', 'data', ''], 
+                       'Categories':['Death', 'Live', 'Death', 'Live'],
+                       'Count':[52009, 543332, deathCount, deathCount],
+                       'Rate':[0.0874, 0.9126, deathRate, liveRate]})
+#output.to_excel(writer, sheet_name='Sheet1', index=False)
+#output = pd.DataFrame({'model':[], 'liveRate' : [liveCount, liveRate, '']})
+output.to_excel(writer, sheet_name='Sheet1', startrow=6, startcol=0, index=False)
+
+liveCount, liveRate, deathCount, deathRate = getCountRate(df1_L)
+
+output = pd.DataFrame({'Model':['OPOM', '', 'data', ''], 
+                       'Categories':['Death', 'Live', 'Death', 'Live'],
+                       'Count':[52009, 543332, deathCount, deathCount],
+                       'Rate':[0.0874, 0.9126, deathRate, liveRate]})
+#output.to_excel(writer, sheet_name='Sheet1', index=False)
+#output = pd.DataFrame({'model':[], 'liveRate' : [liveCount, liveRate, '']})
+output.to_excel(writer, sheet_name='Sheet1', startrow=6, startcol=0, index=False)
 
 writer.save()
 
